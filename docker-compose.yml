@@ -1,0 +1,9 @@
+services:
+  intro-to-engineering:
+    build:
+      dockerfile: ./dev/Dockerfile
+    volumes:
+      - .:/app/
+    env_file:
+      - ./dev/development.env
+    entrypoint: sleep infinity
