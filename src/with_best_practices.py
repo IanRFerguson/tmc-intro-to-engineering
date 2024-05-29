@@ -35,6 +35,7 @@ def nba_player_query(
     # NOTE - Even this is not best practice!
     # https://www.w3schools.com/sql/sql_injection.asp
     base_query = f"select player_name, avg_points from {dataset_name}.{table_name} where player_name = '{player_name}'"
+    print(f"Successfully queried {player_name}...")
 
     return bq.query(sql=base_query)
 
@@ -44,16 +45,19 @@ def main(bq: GoogleBigQuery, player_names: list):
     Loops through NBA players, gets their stats, and prints to the console
     """
 
+    print("Starting the script...")
     # Running list of NBA player data
     nba_player_data = []
 
     # Loop through incoming list of players and add their data to the list
-
+    print("Running queries...")
     for player in player_names:
         nba_player_data.append(nba_player_query(bq=bq, player_name=player))
 
     # Stack the player data and print to the console
     knicks_players = aggregate_data(query_results=nba_player_data)
+
+    print("\nEnd result...\n")
     print(knicks_players.head())
 
 
