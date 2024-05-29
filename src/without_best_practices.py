@@ -1,6 +1,7 @@
 from parsons import GoogleBigQuery
 import pandas as pd
 import os
+from time import sleep
 
 ##########
 
@@ -39,6 +40,7 @@ def main():
     # Invoke ambiguous function
     data = my_function([jalen_brunson, josh_hart, dante_divencenzo])
 
+    sleep(1)
     print("\nEnd result...\n")
     print(data.head())
 

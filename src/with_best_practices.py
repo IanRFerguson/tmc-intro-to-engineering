@@ -2,6 +2,7 @@ from parsons import Table, GoogleBigQuery
 import pandas as pd
 import os
 from typing import List
+from time import sleep
 
 ##########
 
@@ -35,9 +36,10 @@ def nba_player_query(
     # NOTE - Even this is not best practice!
     # https://www.w3schools.com/sql/sql_injection.asp
     base_query = f"select player_name, avg_points from {dataset_name}.{table_name} where player_name = '{player_name}'"
+    response = bq.query(sql=base_query)
     print(f"Successfully queried {player_name}...")
 
-    return bq.query(sql=base_query)
+    return response
 
 
 def main(bq: GoogleBigQuery, player_names: list):
@@ -56,6 +58,9 @@ def main(bq: GoogleBigQuery, player_names: list):
 
     # Stack the player data and print to the console
     knicks_players = aggregate_data(query_results=nba_player_data)
+
+    # For dramatic effect
+    sleep(1)
 
     print("\nEnd result...\n")
     print(knicks_players.head())
