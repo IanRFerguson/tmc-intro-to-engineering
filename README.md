@@ -16,8 +16,8 @@ docker compose up --build -d
 dev/docker_interactive_shell.sh
 
 # Run the "negative" example
-python src/negative_example.py
+python src/without_best_practices.py
 
 # Run the "positive" example
-python src/positive_example.py
+python src/with_best_practices.py
 ```
